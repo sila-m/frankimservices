@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Frankim Services – Hardware & Building Materials</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --orange: #E8540A;
+      --orange-dark: #B83D00;
+      --steel: #1A2535;
+      --steel-mid: #2B3A52;
+      --cream: #F5F0E8;
+      --warm-white: #FEFCF8;
+      --blue-status: #0047CC;
+      --gold: #D4A017;
+      --text-body: #2C2C2C;
+      --text-light: #6B7280;
+      --radius: 4px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--warm-white);
+      color: var(--text-body);
+      overflow-x: hidden;
+    }
+
+    /* ─── TOP STATUS BAR ─── */
+    #status-bar {
+      background: var(--steel);
+      color: #fff;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      position: relative;
+      z-index: 100;
+    }
+    #status-bar .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 30px;
+      padding: 4px 18px 4px 12px;
+    }
+    #status-bar .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      animation: pulse-dot 1.8s ease-in-out infinite;
+    }
+    .dot-open { background: #22C55E; box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+    .dot-closed { background: #EF4444; box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
+    @keyframes pulse-dot {
+      0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+      50%      { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+    }
+    #status-bar .status-text {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--blue-status);
+      text-shadow: 0 0 20px rgba(0,71,204,0.5);
+      letter-spacing: 0.06em;
+    }
+    #status-bar .hours-note { color: #CBD5E1; font-weight: 500; font-size: 0.82rem; margin-left: 10px; }
+
+    /* ─── NAVIGATION ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      background: rgba(26,37,53,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 3px solid var(--orange);
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 68px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo .logo-icon {
+      width: 40px; height: 40px;
+      background: var(--orange);
+      clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      color: #fff;
+      font-size: 1.2rem;
+      letter-spacing: 0;
+    }
+    .nav-logo .logo-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      color: #fff;
+      letter-spacing: 0.1em;
+      line-height: 1;
+    }
+    .nav-logo .logo-sub {
+      font-size: 0.6rem;
+      color: var(--orange);
+      letter-spacing: 0.2em;
+      font-weight: 700;
+      font-family: 'Barlow Condensed', sans-serif;
+      display: block;
+      margin-top: -3px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #CBD5E1;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 3px;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 4px; left: 16px; right: 16px;
+      height: 2px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transition: transform 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta {
+      background: var(--orange);
+      color: #fff !important;
+      padding: 10px 22px !important;
+      border-radius: 3px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--orange-dark) !important; }
+    .nav-cta::after { display: none !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+    .hamburger span { display: block; width: 26px; height: 2.5px; background: #fff; border-radius: 2px; transition: 0.3s; }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 95vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&auto=format&fit=crop&q=85');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      animation: hero-pan 18s ease-in-out infinite alternate;
+    }
+    @keyframes hero-pan {
+      from { transform: scale(1.05) translateX(0); }
+      to   { transform: scale(1.08) translateX(-2%); }
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        rgba(10,15,26,0.93) 0%,
+        rgba(26,37,53,0.85) 45%,
+        rgba(232,84,10,0.18) 100%
+      );
+    }
+    /* Decorative diagonal stripe */
+    .hero-stripe {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -55deg,
+        transparent,
+        transparent 40px,
+        rgba(232,84,10,0.04) 40px,
+        rgba(232,84,10,0.04) 80px
+      );
+      pointer-events: none;
+    }
+    /* Corner accent */
+    .hero-corner {
+      position: absolute;
+      top: 0; right: 0;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle at top right, rgba(232,84,10,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px 48px;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(232,84,10,0.15);
+      border: 1px solid rgba(232,84,10,0.4);
+      border-radius: 30px;
+      padding: 6px 20px;
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+    .hero-eyebrow .line {
+      width: 24px; height: 2px;
+      background: var(--orange);
+    }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      line-height: 0.95;
+      color: #fff;
+      letter-spacing: 0.03em;
+      max-width: 700px;
+      margin-bottom: 10px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--orange);
+      display: block;
+    }
+    .hero-rule {
+      width: 80px; height: 4px;
+      background: linear-gradient(90deg, var(--orange), transparent);
+      margin: 28px 0;
+      border-radius: 2px;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: #CBD5E1;
+      max-width: 500px;
+      line-height: 1.7;
+      font-weight: 500;
+      margin-bottom: 40px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn-primary {
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      padding: 16px 36px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-block;
+      box-shadow: 0 8px 30px rgba(232,84,10,0.4);
+    }
+    .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(232,84,10,0.5); }
+    .btn-ghost {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.3);
+      padding: 14px 34px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+    .hero-stats {
+      position: absolute;
+      bottom: 60px;
+      right: 48px;
+      display: flex;
+      gap: 2px;
+      z-index: 2;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 20px 28px;
+      text-align: center;
+      border-radius: 2px;
+    }
+    .stat-card:first-child { border-radius: 2px 0 0 2px; }
+    .stat-card:last-child { border-radius: 0 2px 2px 0; }
+    .stat-card .num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--orange);
+      letter-spacing: 0.05em;
+      line-height: 1;
+      display: block;
+    }
+    .stat-card .lbl {
+      font-size: 0.72rem;
+      color: #94A3B8;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 600;
+      margin-top: 4px;
+      display: block;
+    }
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 48px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .scroll-hint span {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #64748B;
+      font-weight: 600;
+    }
+    .scroll-hint .line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--orange), transparent);
+      animation: scroll-line 2s ease-in-out infinite;
+    }
+    @keyframes scroll-line {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ─── SECTION SHARED ─── */
+    section { padding: 96px 0; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .section-tag .bar { width: 32px; height: 3px; background: var(--orange); border-radius: 2px; }
+    .section-tag span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      letter-spacing: 0.04em;
+      color: var(--steel);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      max-width: 540px;
+      line-height: 1.7;
+      font-weight: 500;
+    }
+
+    /* ─── SERVICES STRIP ─── */
+    .services-strip {
+      background: var(--steel);
+      padding: 0;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .service-item {
+      padding: 40px 32px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: background 0.2s;
+      cursor: default;
+    }
+    .service-item:last-child { border-right: none; }
+    .service-item:hover { background: rgba(232,84,10,0.1); }
+    .service-icon {
+      font-size: 2rem;
+      width: 56px; height: 56px;
+      background: rgba(232,84,10,0.12);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(232,84,10,0.2);
+    }
+    .service-item h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .service-item p {
+      font-size: 0.88rem;
+      color: #94A3B8;
+      line-height: 1.6;
+    }
+
+    /* ─── PRODUCTS ─── */
+    .products-section { background: var(--cream); }
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 52px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .product-card {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+    }
+    .product-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .product-card:hover img { transform: scale(1.08); }
+    .product-card .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,15,26,0.9) 0%, rgba(10,15,26,0.2) 60%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+      transition: opacity 0.3s;
+    }
+    .product-card .cat-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .product-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      color: #fff;
+      letter-spacing: 0.05em;
+      line-height: 1;
+    }
+    .product-card p {
+      font-size: 0.83rem;
+      color: #CBD5E1;
+      margin-top: 8px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s;
+    }
+    .product-card:hover p { opacity: 1; transform: translateY(0); }
+    .product-card-large {
+      grid-column: span 2;
+      aspect-ratio: 8/3;
+    }
+
+    /* ─── VIDEO SECTION ─── */
+    .video-section {
+      background: var(--steel);
+      position: relative;
+      overflow: hidden;
+    }
+    .video-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 60px,
+        rgba(255,255,255,0.015) 60px,
+        rgba(255,255,255,0.015) 61px
+      );
+    }
+    .video-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .video-text .section-title { color: #fff; }
+    .video-text p {
+      color: #94A3B8;
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+    .video-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+    .highlight-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #CBD5E1;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .highlight-item .check {
+      width: 24px; height: 24px;
+      background: rgba(232,84,10,0.15);
+      border: 1px solid var(--orange);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem;
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+    .video-frame {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+    }
+    .video-frame video {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      display: block;
+    }
+    .video-frame iframe {
+      width: 100%;
+      height: 420px;
+      border: none;
+      display: block;
+    }
+    /* fallback if video fails */
+    .video-fallback {
+      width: 100%;
+      height: 420px;
+      background: linear-gradient(135deg, #1e2d45 0%, #0f1a2c 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      color: #64748B;
+    }
+    .video-fallback .play-icon {
+      width: 80px; height: 80px;
+      border: 3px solid rgba(232,84,10,0.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      color: var(--orange);
+    }
+    .video-badge {
+      position: absolute;
+      top: 16px; left: 16px;
+      background: var(--orange);
+      color: #fff;
+      padding: 6px 14px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials-section { background: var(--warm-white); }
+    .testimonials-intro {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .testimonials-intro .section-tag { justify-content: center; }
+    .testimonials-intro .section-subtitle { margin: 0 auto; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: #fff;
+      border: 1px solid #E8E8E8;
+      border-radius: 4px;
+      padding: 36px 32px;
+      position: relative;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    }
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 20px; right: 28px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 6rem;
+      color: var(--orange);
+      opacity: 0.12;
+      line-height: 1;
+    }
+    .stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 18px;
+    }
+    .stars span { font-size: 1rem; color: var(--gold); }
+    .testimonial-card blockquote {
+      font-size: 0.97rem;
+      line-height: 1.75;
+      color: #374151;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+    .testimonial-card cite {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-style: normal;
+    }
+    .avatar {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--steel);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      color: var(--orange);
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .cite-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--steel);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: block;
+    }
+    .cite-role { font-size: 0.8rem; color: var(--text-light); display: block; margin-top: 2px; }
+
+    /* ─── ABOUT STRIP ─── */
+    .about-section {
+      background: var(--cream);
+    }
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-images {
+      position: relative;
+      height: 500px;
+    }
+    .about-img-main {
+      position: absolute;
+      top: 0; left: 0;
+      width: 75%; height: 80%;
+      object-fit: cover;
+      border-radius: 2px;
+    }
+    .about-img-accent {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 55%; height: 55%;
+      object-fit: cover;
+      border-radius: 2px;
+      border: 6px solid var(--cream);
+    }
+    .about-badge {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 110px; height: 110px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      color: #fff;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-align: center;
+      padding: 12px;
+      border: 5px solid var(--cream);
+      z-index: 10;
+    }
+    .about-badge strong { font-size: 2rem; letter-spacing: 0; display: block; line-height: 1; }
+    .about-text p {
+      font-size: 1.02rem;
+      color: #4B5563;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .about-perks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .perk {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .perk-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .perk h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--steel);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .perk p { font-size: 0.83rem; color: var(--text-light); line-height: 1.5; margin-top: 2px; }
+
+    /* ─── CONTACT CTA ─── */
+    .cta-section {
+      background: var(--steel);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,84,10,0.15) 0%, transparent 70%);
+    }
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+    .cta-text .section-title { color: #fff; margin-bottom: 10px; }
+    .cta-text p { color: #94A3B8; font-size: 1rem; max-width: 480px; line-height: 1.7; }
+    .cta-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #CBD5E1;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    .contact-row .icon {
+      width: 40px; height: 40px;
+      background: rgba(232,84,10,0.15);
+      border: 1px solid rgba(232,84,10,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .contact-row a { color: inherit; text-decoration: none; }
+    .contact-row a:hover { color: var(--orange); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #0D1520;
+      padding: 60px 0 30px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-brand p { color: #64748B; font-size: 0.9rem; line-height: 1.7; margin-top: 16px; max-width: 280px; }
+    .footer-col h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      color: #64748B;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: #CBD5E1; }
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p { color: #374151; font-size: 0.83rem; }
+
+    /* ─── AI CHAT WIDGET ─── */
+    #chat-btn {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 999;
+      width: 62px; height: 62px;
+      background: var(--orange);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 32px rgba(232,84,10,0.5);
+      transition: transform 0.25s, box-shadow 0.25s;
+      font-size: 1.6rem;
+    }
+    #chat-btn:hover { transform: scale(1.1); box-shadow: 0 12px 40px rgba(232,84,10,0.6); }
+    #chat-btn .badge {
+      position: absolute;
+      top: -4px; right: -4px;
+      width: 18px; height: 18px;
+      background: #22C55E;
+      border-radius: 50%;
+      border: 2px solid var(--warm-white);
+    }
+
+    #chat-panel {
+      position: fixed;
+      bottom: 110px; right: 32px;
+      z-index: 998;
+      width: 380px;
+      max-height: 540px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.18);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid #E8E8E8;
+      animation: chat-in 0.25s ease;
+    }
+    #chat-panel.open { display: flex; }
+    @keyframes chat-in {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .chat-head {
+      background: var(--steel);
+      padding: 20px 20px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+    .chat-head-avatar {
+      width: 42px; height: 42px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .chat-head-info { flex: 1; }
+    .chat-head-info strong {
+      display: block;
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+    }
+    .chat-head-info small { color: #94A3B8; font-size: 0.78rem; }
+    .chat-close {
+      background: rgba(255,255,255,0.08);
+      border: none;
+      color: #94A3B8;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .chat-close:hover { background: rgba(255,255,255,0.15); color: #fff; }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: #F8F9FA;
+    }
+    .chat-messages::-webkit-scrollbar { width: 4px; }
+    .chat-messages::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 2px; }
+    .msg {
+      max-width: 85%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      word-wrap: break-word;
+    }
+    .msg.bot {
+      background: #fff;
+      color: var(--text-body);
+      border: 1px solid #E8E8E8;
+      border-bottom-left-radius: 3px;
+      align-self: flex-start;
+    }
+    .msg.user {
+      background: var(--orange);
+      color: #fff;
+      border-bottom-right-radius: 3px;
+      align-self: flex-end;
+    }
+    .msg.typing {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      padding: 14px 18px;
+    }
+    .typing-dot {
+      width: 7px; height: 7px;
+      background: #94A3B8;
+      border-radius: 50%;
+      animation: typing-bounce 1.2s ease-in-out infinite;
+    }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing-bounce {
+      0%,80%,100% { transform: translateY(0); }
+      40% { transform: translateY(-6px); }
+    }
+    .quick-replies {
+      padding: 10px 20px 0;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      background: #F8F9FA;
+    }
+    .quick-reply {
+      background: #fff;
+      border: 1.5px solid var(--orange);
+      color: var(--orange);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      font-family: 'Barlow', sans-serif;
+    }
+    .quick-reply:hover { background: var(--orange); color: #fff; }
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+      padding: 16px;
+      background: #fff;
+      border-top: 1px solid #F0F0F0;
+      flex-shrink: 0;
+    }
+    .chat-input-row input {
+      flex: 1;
+      border: 1.5px solid #E8E8E8;
+      border-radius: 24px;
+      padding: 10px 18px;
+      font-size: 0.88rem;
+      font-family: 'Barlow', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+      color: var(--text-body);
+    }
+    .chat-input-row input:focus { border-color: var(--orange); }
+    .chat-input-row button {
+      width: 40px; height: 40px;
+      background: var(--orange);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      color: #fff;
+      font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    .chat-input-row button:hover { background: var(--orange-dark); }
+    .chat-input-row button:disabled { background: #CBD5E1; cursor: not-allowed; }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 900px) {
+      .container { padding: 0 24px; }
+      .nav-inner { padding: 0 24px; }
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px; left: 0; right: 0;
+        background: rgba(26,37,53,0.99);
+        flex-direction: column;
+        padding: 16px;
+        gap: 4px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 16px; }
+      .hero-content { padding: 60px 24px; }
+      .hero-stats { position: static; margin-top: 48px; display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+      .scroll-hint { display: none; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .products-grid { grid-template-columns: 1fr 1fr; }
+      .product-card-large { grid-column: span 2; aspect-ratio: unset; height: 220px; }
+      .video-layout { grid-template-columns: 1fr; gap: 40px; }
+      .video-frame video, .video-frame iframe { height: 260px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .about-layout { grid-template-columns: 1fr; }
+      .about-images { height: 300px; margin-bottom: 32px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      #chat-panel { width: calc(100vw - 32px); right: 16px; }
+      .cta-inner { flex-direction: column; }
+      section { padding: 64px 0; }
+    }
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: 1fr; }
+      .product-card-large { grid-column: span 1; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       TOP STATUS BAR
+  ═══════════════════════════════════════ -->
+  <div id="status-bar">
+    <span class="status-badge">
+      <span class="dot dot-open" id="status-dot"></span>
+      <span class="status-text" id="status-text">STORE OPEN</span>
+      <span class="hours-note" id="hours-note">Mon–Sat: 7 AM – 6 PM &nbsp;|&nbsp; Sun: 8 AM – 2 PM</span>
+    </span>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════ -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="logo-icon">F</div>
+        <div>
+          <span class="logo-text">Frankim</span>
+          <span class="logo-sub">Services</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-stripe"></div>
+    <div class="hero-corner"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="line"></div>
+        <span>Nairobi's Trusted Hardware Store</span>
+        <div class="line"></div>
+      </div>
+      <h1>
+        Building <em>Your Dreams,</em> One Bolt at a Time
+      </h1>
+      <div class="hero-rule"></div>
+      <p>Premium hardware, building materials, tools, and supplies — everything you need to build, fix, and finish, all under one roof.</p>
+      <div class="hero-actions">
+        <a href="#products" class="btn-primary">Explore Products</a>
+        <a href="#contact" class="btn-ghost">Get a Quote</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <span class="num">15+</span>
+        <span class="lbl">Years Open</span>
+      </div>
+      <div class="stat-card">
+        <span class="num">5K+</span>
+        <span class="lbl">Products</span>
+      </div>
+      <div class="stat-card">
+        <span class="num">98%</span>
+        <span class="lbl">Satisfaction</span>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SERVICES STRIP
+  ═══════════════════════════════════════ -->
+  <div class="services-strip" id="services">
+    <div class="services-grid">
+      <div class="service-item">
+        <div class="service-icon">🏗️</div>
+        <h3>Building Materials</h3>
+        <p>Cement, sand, bricks, timber, and all structural materials for your project.</p>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">🔧</div>
+        <h3>Tools & Equipment</h3>
+        <p>Hand tools, power tools, and heavy equipment for professionals and DIYers.</p>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">🚚</div>
+        <h3>Bulk Delivery</h3>
+        <p>Same-day and next-day delivery across Nairobi and surrounding areas.</p>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">💡</div>
+        <h3>Expert Advice</h3>
+        <p>Our knowledgeable team helps you choose the right materials every time.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PRODUCTS
+  ═══════════════════════════════════════ -->
+  <section class="products-section" id="products">
+    <div class="container">
+      <div class="products-header">
+        <div>
+          <div class="section-tag"><div class="bar"></div><span>Our Range</span></div>
+          <h2 class="section-title">Quality Products<br>For Every Job</h2>
+        </div>
+        <p class="section-subtitle">From foundation to finishing, we stock thousands of products from trusted manufacturers.</p>
+      </div>
+      <div class="products-grid">
+        <!-- Large card -->
+        <div class="product-card product-card-large">
+          <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=900&auto=format&fit=crop&q=80" alt="Tools & Hardware" loading="lazy"/>
+          <div class="card-overlay">
+            <span class="cat-tag">Featured Category</span>
+            <h3>Power Tools & Hand Tools</h3>
+            <p>Professional-grade tools from Bosch, DeWalt, Makita and more. Built to last on every job site.</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=80" alt="Cement & Masonry" loading="lazy"/>
+          <div class="card-overlay">
+            <span class="cat-tag">Structural</span>
+            <h3>Cement & Masonry</h3>
+            <p>Bamburi, Mombasa, and East Africa Portland cement in all grades.</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1503708928676-1cb796a0891e?w=600&auto=format&fit=crop&q=80" alt="Timber & Wood" loading="lazy"/>
+          <div class="card-overlay">
+            <span class="cat-tag">Timber</span>
+            <h3>Timber & Wood Products</h3>
+            <p>Hardwood, softwood, and treated timber for construction and joinery.</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&auto=format&fit=crop&q=80" alt="Plumbing" loading="lazy"/>
+          <div class="card-overlay">
+            <span class="cat-tag">Plumbing</span>
+            <h3>Pipes & Fittings</h3>
+            <p>PPR, HDPE, PVC pipes plus all fittings, valves, and accessories.</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&auto=format&fit=crop&q=80" alt="Electrical" loading="lazy"/>
+          <div class="card-overlay">
+            <span class="cat-tag">Electrical</span>
+            <h3>Electrical Supplies</h3>
+            <p>Cables, conduits, switches, sockets, and all wiring accessories.</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80" alt="Paint" loading="lazy"/>
+          <div class="card-overlay">
+            <span class="cat-tag">Finishing</span>
+            <h3>Paints & Coatings</h3>
+            <p>Crown, Sadolin, Dulux paints with expert colour mixing on-site.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       VIDEO SECTION
+  ═══════════════════════════════════════ -->
+  <section class="video-section">
+    <div class="container">
+      <div class="video-layout">
+        <div class="video-text">
+          <div class="section-tag"><div class="bar"></div><span>See Us In Action</span></div>
+          <h2 class="section-title">Come See What Nairobi Builders Trust</h2>
+          <p>Step inside Frankim Services and see why contractors, builders, and homeowners across Nairobi come back again and again. Our store is stocked, our staff is ready, and your project is our priority.</p>
+          <div class="video-highlights">
+            <div class="highlight-item"><span class="check">✓</span>Fully stocked shelves, every day</div>
+            <div class="highlight-item"><span class="check">✓</span>Experienced staff who know what you need</div>
+            <div class="highlight-item"><span class="check">✓</span>Competitive pricing on bulk orders</div>
+            <div class="highlight-item"><span class="check">✓</span>Convenient location with easy parking</div>
+          </div>
+          <a href="#contact" class="btn-primary">Visit Our Store</a>
+        </div>
+        <div class="video-frame">
+          <span class="video-badge">▶ Store Walkthrough</span>
+          <video
+            autoplay muted loop playsinline
+            poster="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&auto=format&fit=crop&q=70"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <source src="https://videos.pexels.com/video-files/3209828/3209828-uhd_2560_1440_25fps.mp4" type="video/mp4"/>
+          </video>
+          <!-- fallback display -->
+          <div class="video-fallback" style="display:none">
+            <div class="play-icon">▶</div>
+            <p style="font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;font-size:0.9rem;">Store Walkthrough Video</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       TESTIMONIALS
+  ═══════════════════════════════════════ -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="testimonials-intro">
+        <div class="section-tag"><div class="bar"></div><span>Customer Reviews</span></div>
+        <h2 class="section-title">What Our Customers Say</h2>
+        <p class="section-subtitle">Thousands of builders, contractors, and homeowners trust Frankim for their hardware needs.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <blockquote>"I've been buying all my building materials from Frankim for over 8 years. Their cement is always authentic, prices are fair, and the delivery guys never disappoint. Best hardware in Nairobi."</blockquote>
+          <cite>
+            <div class="avatar">JM</div>
+            <div>
+              <span class="cite-name">James Mwangi</span>
+              <span class="cite-role">Building Contractor, Westlands</span>
+            </div>
+          </cite>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <blockquote>"As a plumber, I need quality pipes and fittings that don't fail on the job. Frankim has never let me down. Their stock is wide, staff know their stuff, and I get same-day delivery. Highly recommend."</blockquote>
+          <cite>
+            <div class="avatar">AK</div>
+            <div>
+              <span class="cite-name">Alice Kamau</span>
+              <span class="cite-role">Master Plumber, Ruaka</span>
+            </div>
+          </cite>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <blockquote>"I was renovating my home and didn't know where to start. The team at Frankim walked me through everything — paints, tiles, electrical. They saved me money and the result is beautiful."</blockquote>
+          <cite>
+            <div class="avatar">PO</div>
+            <div>
+              <span class="cite-name">Peter Otieno</span>
+              <span class="cite-role">Homeowner, Karen</span>
+            </div>
+          </cite>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <blockquote>"Our construction firm has been ordering bulk timber from Frankim for two years. Consistent quality, correct measurements, and always on time. We won't go anywhere else."</blockquote>
+          <cite>
+            <div class="avatar">FN</div>
+            <div>
+              <span class="cite-name">Faith Njoroge</span>
+              <span class="cite-role">Site Manager, Eastleigh</span>
+            </div>
+          </cite>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span></div>
+          <blockquote>"Great selection of power tools and the prices beat everywhere else I checked in Nairobi. Staff helped me pick the right drill for my project. I'll definitely be back for more tools."</blockquote>
+          <cite>
+            <div class="avatar">DM</div>
+            <div>
+              <span class="cite-name">David Mutua</span>
+              <span class="cite-role">DIY Enthusiast, Kahawa</span>
+            </div>
+          </cite>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <blockquote>"The electrical section is incredible — I found everything I needed for my commercial fit-out in one trip. The team even helped me calculate quantities. Professional service all the way."</blockquote>
+          <cite>
+            <div class="avatar">SW</div>
+            <div>
+              <span class="cite-name">Samuel Waweru</span>
+              <span class="cite-role">Electrical Engineer, CBD</span>
+            </div>
+          </cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       ABOUT
+  ═══════════════════════════════════════ -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="about-layout">
+        <div class="about-images">
+          <img class="about-img-main"
+            src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=700&auto=format&fit=crop&q=80"
+            alt="Our store"
+            loading="lazy"/>
+          <img class="about-img-accent"
+            src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=500&auto=format&fit=crop&q=80"
+            alt="Building construction"
+            loading="lazy"/>
+          <div class="about-badge">
+            <strong>15+</strong>
+            Years of Service
+          </div>
+        </div>
+        <div class="about-text">
+          <div class="section-tag"><div class="bar"></div><span>About Us</span></div>
+          <h2 class="section-title">Nairobi's Hardware Partner Since 2009</h2>
+          <p>Frankim Services was founded with a simple mission: give Nairobi's builders, contractors, and homeowners access to quality hardware at honest prices, backed by people who actually know construction.</p>
+          <p>Over 15 years, we've grown from a small shop to one of the most trusted hardware suppliers in the region — stocking over 5,000 products and serving thousands of customers every month.</p>
+          <div class="about-perks">
+            <div class="perk">
+              <span class="perk-icon">✅</span>
+              <div>
+                <h4>Genuine Products</h4>
+                <p>We source directly from manufacturers and authorized distributors.</p>
+              </div>
+            </div>
+            <div class="perk">
+              <span class="perk-icon">🚚</span>
+              <div>
+                <h4>Fast Delivery</h4>
+                <p>Same-day delivery within Nairobi on orders placed before noon.</p>
+              </div>
+            </div>
+            <div class="perk">
+              <span class="perk-icon">💬</span>
+              <div>
+                <h4>Expert Staff</h4>
+                <p>Every team member trained to give you the right advice.</p>
+              </div>
+            </div>
+            <div class="perk">
+              <span class="perk-icon">💰</span>
+              <div>
+                <h4>Bulk Discounts</h4>
+                <p>Special pricing for contractors and large project orders.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CONTACT CTA
+  ═══════════════════════════════════════ -->
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-text">
+          <div class="section-tag"><div class="bar"></div><span>Get In Touch</span></div>
+          <h2 class="section-title">Ready To Build?<br>Let's Talk.</h2>
+          <p>Visit our store, call us, or chat with our AI assistant below. We're here to help you get your project done right.</p>
+        </div>
+        <div class="cta-contacts">
+          <div class="contact-row">
+            <span class="icon">📞</span>
+            <a href="tel:+254700000000">+254 700 000 000</a>
+          </div>
+          <div class="contact-row">
+            <span class="icon">💬</span>
+            <a href="https://wa.me/254700000000" target="_blank">WhatsApp Us</a>
+          </div>
+          <div class="contact-row">
+            <span class="icon">📍</span>
+            <span>Nairobi, Kenya</span>
+          </div>
+          <div class="contact-row">
+            <span class="icon">🕐</span>
+            <span>Mon–Sat: 7 AM–6 PM &nbsp;|&nbsp; Sun: 8 AM–2 PM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo">
+            <div class="logo-icon">F</div>
+            <div>
+              <span class="logo-text" style="color:#fff">Frankim</span>
+              <span class="logo-sub">Services</span>
+            </div>
+          </a>
+          <p>Nairobi's trusted hardware and building materials supplier since 2009. Quality products, honest prices, expert advice.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="#">Building Materials</a></li>
+            <li><a href="#">Power Tools</a></li>
+            <li><a href="#">Plumbing</a></li>
+            <li><a href="#">Electrical</a></li>
+            <li><a href="#">Paints & Finishes</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#">Bulk Ordering</a></li>
+            <li><a href="#">Delivery</a></li>
+            <li><a href="#">Expert Advice</a></li>
+            <li><a href="#">Project Quotes</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Testimonials</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Frankim Services. All rights reserved.</p>
+        <p style="color:#374151;font-size:0.83rem">Built with ❤️ for Nairobi's builders</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       AI CHAT WIDGET
+  ═══════════════════════════════════════ -->
+  <button id="chat-btn" onclick="toggleChat()" title="Chat with us">
+    💬
+    <span class="badge"></span>
+  </button>
+
+  <div id="chat-panel">
+    <div class="chat-head">
+      <div class="chat-head-avatar">🛠️</div>
+      <div class="chat-head-info">
+        <strong>Frankim Assistant</strong>
+        <small>AI-powered • Usually replies instantly</small>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="msg bot">
+        👋 Hi! I'm the Frankim Services AI assistant.<br><br>
+        Ask me about our <strong>products</strong>, <strong>prices</strong>, <strong>delivery</strong>, or anything else about our hardware store!
+      </div>
+    </div>
+    <div class="quick-replies" id="quick-replies">
+      <button class="quick-reply" onclick="sendQuick('What products do you stock?')">Products</button>
+      <button class="quick-reply" onclick="sendQuick('Do you offer delivery?')">Delivery</button>
+      <button class="quick-reply" onclick="sendQuick('What are your opening hours?')">Hours</button>
+      <button class="quick-reply" onclick="sendQuick('Do you offer bulk discounts?')">Bulk Orders</button>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" id="chat-input" placeholder="Ask anything about our store…" onkeypress="if(event.key==='Enter')sendMessage()"/>
+      <button onclick="sendMessage()" id="send-btn">➤</button>
+    </div>
+  </div>
+
+  <script>
+    /* ─── STORE STATUS ─── */
+    function checkStoreStatus() {
+      const now = new Date();
+      const nairobi = new Date(now.toLocaleString('en-US', { timeZone: 'Africa/Nairobi' }));
+      const day = nairobi.getDay(); // 0=Sun,6=Sat
+      const h = nairobi.getHours();
+      const m = nairobi.getMinutes();
+      const time = h * 60 + m;
+      let isOpen = false;
+      if (day >= 1 && day <= 6) isOpen = time >= 7*60 && time < 18*60;  // Mon-Sat 7-18
+      if (day === 0)             isOpen = time >= 8*60 && time < 14*60;  // Sun 8-14
+      const dot  = document.getElementById('status-dot');
+      const text = document.getElementById('status-text');
+      if (isOpen) {
+        dot.className = 'dot dot-open';
+        text.textContent = 'STORE IS OPEN NOW';
+        text.style.color = '#22C55E';
+      } else {
+        dot.className = 'dot dot-closed';
+        text.textContent = 'STORE IS CLOSED';
+        text.style.color = '#EF4444';
+      }
+    }
+    checkStoreStatus();
+    setInterval(checkStoreStatus, 60000);
+
+    /* ─── NAV ─── */
+    function toggleNav() {
+      document.getElementById('nav-links').classList.toggle('open');
+    }
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => document.getElementById('nav-links').classList.remove('open'));
+    });
+
+    /* ─── CHAT ─── */
+    let chatOpen = false;
+    function toggleChat() {
+      chatOpen = !chatOpen;
+      const panel = document.getElementById('chat-panel');
+      if (chatOpen) { panel.classList.add('open'); document.getElementById('chat-btn').innerHTML = '✕<span class="badge"></span>'; }
+      else { panel.classList.remove('open'); document.getElementById('chat-btn').innerHTML = '💬<span class="badge"></span>'; }
+    }
+
+    function addMsg(text, type) {
+      const msgs = document.getElementById('chat-messages');
+      const el = document.createElement('div');
+      el.className = 'msg ' + type;
+      el.innerHTML = text;
+      msgs.appendChild(el);
+      msgs.scrollTop = msgs.scrollHeight;
+      return el;
+    }
+
+    function showTyping() {
+      const msgs = document.getElementById('chat-messages');
+      const el = document.createElement('div');
+      el.className = 'msg bot typing';
+      el.id = 'typing-ind';
+      el.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+      msgs.appendChild(el);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+    function hideTyping() {
+      const el = document.getElementById('typing-ind');
+      if (el) el.remove();
+    }
+
+    function sendQuick(text) {
+      document.getElementById('quick-replies').style.display = 'none';
+      addMsg(text, 'user');
+      askClaude(text);
+    }
+
+    function sendMessage() {
+      const inp = document.getElementById('chat-input');
+      const text = inp.value.trim();
+      if (!text) return;
+      inp.value = '';
+      document.getElementById('quick-replies').style.display = 'none';
+      addMsg(text, 'user');
+      askClaude(text);
+    }
+
+    async function askClaude(userMsg) {
+      const btn = document.getElementById('send-btn');
+      btn.disabled = true;
+      showTyping();
+      try {
+        const res = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 400,
+            system: `You are the friendly AI assistant for Frankim Services, a hardware and building materials store in Nairobi, Kenya.
+
+Store details:
+- Name: Frankim Services
+- Location: Nairobi, Kenya
+- Opening hours: Monday–Saturday 7 AM–6 PM, Sunday 8 AM–2 PM
+- Phone: +254 700 000 000
+- Products: Building materials (cement, sand, bricks, timber), power tools, hand tools, plumbing (pipes, fittings), electrical supplies, paints & coatings, roofing materials, tiles & flooring, hardware fasteners
+- Services: Bulk ordering with discounts, same-day delivery in Nairobi (orders before noon), expert advice, project quotes
+- Brands: Bamburi/Mombasa/Portland cement, Bosch/DeWalt/Makita tools, Crown/Sadolin/Dulux paints
+
+Be helpful, warm, and concise. Answer in 2–4 sentences. If asked about specific prices, say prices vary and invite them to call or visit. Always represent Frankim positively.`,
+            messages: [{ role: 'user', content: userMsg }]
+          })
+        });
+        const data = await res.json();
+        hideTyping();
+        const reply = data.content && data.content[0] ? data.content[0].text : "Thanks for your message! Please call us at +254 700 000 000 or visit our store for assistance.";
+        addMsg(reply, 'bot');
+      } catch (err) {
+        hideTyping();
+        addMsg("Sorry, I'm having trouble connecting right now. Please call us at <strong>+254 700 000 000</strong> or visit our store — we're happy to help!", 'bot');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    /* ─── SCROLL ANIMATIONS ─── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.testimonial-card, .product-card, .service-item, .stat-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
